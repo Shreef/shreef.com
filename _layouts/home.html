@@ -1,0 +1,40 @@
+---
+layout: default
+list_title: Posts
+---
+
+<div class="home">
+
+  <section class="heading">
+    <h1 >{{ site.title }}</h1>
+    <p>{{ site.description }}</p>
+  </section>
+
+  <!-- start posts list-->
+  {% assign posts = site.posts %}
+  <ul class="post-list">
+
+  {% assign list_year = nil %}
+  {%- for post in posts -%}
+    <!-- start year -->
+    {% assign post_year = post.date | date: "%Y" %}
+    {%- if list_year != post_year -%}
+    {% assign list_year = post_year %}
+      <h2 class="post-year">{{ list_year }}</h2>
+    {%- endif -%}
+    <!-- end year -->
+
+    <!-- start post link-->
+    <li>
+      <h3>
+        <a class="post-link" href="{{ post.url | relative_url }}">
+          {{ post.title | escape }}
+        </a>
+      </h3>
+    </li>
+    <!-- end post link-->
+  {%- endfor -%}
+  </ul>
+  <!-- end posts list-->
+
+</div>
